@@ -15,12 +15,12 @@ class Lexer<T> {
         return LEXER;
     }
 
-    static Lexer<String> from(String patternString) {
+    static <U> Lexer<U> from(String patternString) {
         Objects.requireNonNull(patternString);
         return Lexer.from(Pattern.compile(patternString));
     }
 
-    static Lexer<String> from(Pattern pattern) {
+    static <U> Lexer<U> from(Pattern pattern) {
         Objects.requireNonNull(pattern);
 
         Matcher matcher = pattern.matcher("");
