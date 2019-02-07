@@ -9,7 +9,7 @@ class Lexer<T> {
 
     private final static Lexer LEXER = new Lexer();
 
-    private static Pattern CURRENT_PATTERN;
+    private Pattern currentPattern;
 
     static Lexer create() {
         return LEXER;
@@ -28,18 +28,18 @@ class Lexer<T> {
             throw new IllegalArgumentException();
         }
 
-        CURRENT_PATTERN = pattern;
+        LEXER.currentPattern = pattern;
         return LEXER;
     }
 
     Optional<String> tryParse(String toBeParsed) {
         Objects.requireNonNull(toBeParsed);
 
-        if (CURRENT_PATTERN == null) {
+        if (currentPattern == null) {
             return Optional.empty();
         }
 
-        Matcher matcher = CURRENT_PATTERN.matcher(toBeParsed);
+        Matcher matcher = currentPattern.matcher(toBeParsed);
 
         if (matcher.matches()) {
             if (matcher.groupCount() > 1) {
